@@ -8,9 +8,34 @@
       <!-- Your site content here -->
       <button id= "show">Show all users</button>
       <div id = "users"></div>
+      <div id="add">
+        <input id="name" type="text" placeholder="Name">
+        <input id="email" type="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+        <button id="signup">Sign Up</button>
+      </div>
       <script src="jquery-3.3.1.min.js"></script>
       <script src="script.js"></script>
       <script>
+        var user={name:"", email:"", password:""}
+        $('#signup').click(function(){
+          user.name=$('#name').val();
+          user.email=$('#email').val();
+          user.password=$('#password').val();
+          $.ajax({
+            method:"Post",
+            url:"http://skeleton.mernbook.com/api/users",
+            data: user
+          }).done(function(response){
+            
+            console.log(response)
+
+          }).fail(function(response){
+            console.log(response)
+
+          })
+          
+        })
         $('#show').click(function(){
           $.ajax({
             method:"GET",
